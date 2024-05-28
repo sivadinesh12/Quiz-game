@@ -1,0 +1,43 @@
+.bg-container {
+  background: linear-gradient(to right, #dbbcc4, #f3dfd8, #d8bfd0, #b7b1d5);
+  height: 100vh;
+  padding: 110px;
+  overflow: auto;
+}
+.login-form {
+  background-color: #f8fafc;
+  padding: 30px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  margin: 20px;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.input-element {
+  width: 411px;
+  border: 1px #d7dfe9 solid;
+  border-radius: 12px;
+  height: 35px;
+  padding: 10px;
+  outline: none;
+}
+.label-element {
+  font-weight: 700;
+  color: #7e858e;
+  font-family: Roboto;
+  font-size: 12px;
+}
+
+.checkbox-container{
+  display: flex;
+  justify-content: end;
+}
