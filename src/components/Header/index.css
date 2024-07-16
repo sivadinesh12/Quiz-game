@@ -1,0 +1,16 @@
+.header-bg {
+  background-color: #fafbfe;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 48px;
+  padding-right: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logout-btn {
+  width: 86px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px #afafaf solid;
+}

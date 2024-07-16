@@ -1,8 +1,9 @@
 import {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import './index.css'
 
-class Home extends Component {
+class Login extends Component {
   state = {
     isLoginFailed: false,
     userInput: '',
@@ -20,7 +21,7 @@ class Home extends Component {
   }
 
   changeCheckbox = () => {
-    this.setState(prevState => ({isPassWordShowing: !prevState.isLoginFailed}))
+    this.setState(prevState => ({isPassWordShowing: !prevState.isPassWordShowing}))
   }
 
   onSuccess = jwtToken => {
@@ -29,30 +30,42 @@ class Home extends Component {
     history.replace('/')
   }
 
+  onFailure = errorMsg => {
+    this.setState({isLoginFailed: true, errormsg: errorMsg})
+  }
+
   loginUser = async event => {
     event.preventDefault()
     const {userInput, password} = this.state
-    const userDetails = {userInput, password}
+    const userDetails = {username: userInput, password: password}
     const url = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
     }
     const reponse = await fetch(url, options)
-    const data = await reponse.json
+    const data = await reponse.json()
+    console.log(reponse)
     if (reponse.ok === true) {
       this.onSuccess(data.jwt_token)
+    } else {
+      this.onFailure(data.error_msg)
     }
   }
 
   render() {
-    const {userInput, password, isLoginFailed, errormsg} = this.state
+    const {userInput, password, isLoginFailed, errormsg, isPassWordShowing} =
+      this.state
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="bg-container">
         <form className="login-form" onSubmit={this.loginUser}>
           <img
             src="https://res.cloudinary.com/dh46cfc1b/image/upload/v1716805879/Frame_8787logo_hhiheq.png"
-            alt="website logo"
+            alt="login website logo"
             className="logo"
           />
           <div>
@@ -73,7 +86,7 @@ class Home extends Component {
                 PASSWORD
               </label>
               <input
-                type="input"
+                type={`${isPassWordShowing ? 'text' : 'password'}`}
                 value={password}
                 id="password"
                 className="input-element"
@@ -92,11 +105,11 @@ class Home extends Component {
           <button className="login-btn" type="submit">
             Login
           </button>
+          {isLoginFailed && <p>{errormsg}</p>}
         </form>
-        {isLoginFailed && <p>{errormsg}</p>}
       </div>
     )
   }
 }
 
-export default Home
+export default Login

@@ -1,0 +1,22 @@
+.list-item {
+  width: 380px;
+  height: 64px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.correct {
+  background-color: green;
+  color: white;
+}
+
+.wrong {
+  background-color: red;
+  color: white;
+}

@@ -1,0 +1,54 @@
+.option-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.default-list-item {
+  width: 380px;
+  height: 64px;
+  background-color: #cbd5e1;
+  margin: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.correct {
+  background-color: #1c944b;
+  width: 380px;
+  height: 64px;
+  margin: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-option-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-item {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+.check-img {
+  height: 25.6px;
+  width: 25.6px;
+}
+.default-list-item-container {
+  display: flex;
+  align-items: center;
+}
+
+.unattempted-question-text {
+  color: #334155;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 500;
+}

@@ -1,0 +1,12 @@
+.img-option {
+  height: 50px;
+  width: 178px;
+}
+.image-option {
+  margin-right: 28px;
+}
+
+.option-container {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,11 @@
+.not-found-bg {
+  height: 397px;
+  width: 475px;
+}
+.page-bg {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

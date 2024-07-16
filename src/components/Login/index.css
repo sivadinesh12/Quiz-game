@@ -37,7 +37,17 @@
   font-size: 12px;
 }
 
-.checkbox-container{
+.checkbox-container {
   display: flex;
   justify-content: end;
+}
+
+.login-btn{
+  width: 411px;
+  height: 40px;
+  border: none;
+  background-color: #0EA5E9;
+  border-radius: 10px;
+  color: #ffffff;
+  font: Intel;
 }

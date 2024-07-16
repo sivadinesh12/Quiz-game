@@ -1,0 +1,46 @@
+.questions-bg {
+  background-image: linear-gradient(
+    to right,
+    #dbbcc4,
+    #f3dfd8,
+    #d8bfd0,
+    #b7b1d5
+  );
+  height: 100vh;
+  padding: 70px;
+  display: flex;
+  justify-content: center;
+}
+.questions-card {
+  background-color: #f8fafc;
+  width: 100%;
+  padding: 25px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.failure-view {
+  background-color: #f8fafc;
+  width: 100%;
+  padding: 25px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+failure-icon {
+  width: 677px;
+  height: 364px;
+}
+.error-message {
+}
+.retry-button {
+}
+
+.correct {
+  background-color: #1c944b;
+}
+.wrong {
+  background-color: #bf2626;
+}
