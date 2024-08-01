@@ -1,40 +1,57 @@
+import React from 'react'
 import './index.css'
 
 const ImageTypeOptionItem = props => {
-  const {optionDetails, checkOption, optionList, selectedOptionId, isAnswered} =
-    props
-  const {id, text, image_url} = optionDetails
-  const imageUrl = image_url
+  const {
+    optionDetails,
+    checkOption,
+    optionList,
+    selectedOptionId,
+    isAnswered,
+    isCorrect,
+    imageUrl,
+    selectedOptionAnswer,
+  } = props
+  const {id, text} = optionDetails
 
   const runCheckOptions = event => {
     if (!isAnswered) {
-      checkOption(optionList, id, event)
+      checkOption(optionList, id, event, isCorrect)
+    }
+  }
+
+  let feedbackIcon = null
+  if (isAnswered) {
+    if (
+      (selectedOptionId === id && isCorrect === 'true') ||
+      (selectedOptionAnswer === 'false' && isCorrect === 'true')
+    ) {
+      feedbackIcon = (
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/quiz-game-check-circle-img.png"
+          alt="correct checked circle"
+          className="icon correct-icon"
+        />
+      )
+    } else if (selectedOptionId === id && isCorrect === 'false') {
+      feedbackIcon = (
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/quiz-game-close-circle-img.png"
+          alt="incorrect close circle"
+          className="icon wrong-icon"
+        />
+      )
     }
   }
 
   return (
     <div className="option-container">
-      <li id={id} onClick={runCheckOptions} className="image-option">
-        <img src={imageUrl} className="img-option" alt={text} />
+      <li>
+        <button onClick={runCheckOptions}>
+          <img src={imageUrl} className="img-option" alt={text} />
+        </button>
       </li>
-      {isAnswered && (
-        <>
-          {selectedOptionId === id && optionDetails.is_correct === 'true' && (
-            <img
-              src="https://res.cloudinary.com/dh46cfc1b/image/upload/v1717426001/check-circle.1_1_lqrzwg.png"
-              alt="correct checked circle"
-              className="icon correct-icon"
-            />
-          )}
-          {selectedOptionId === id && optionDetails.is_correct === 'false' && (
-            <img
-              src="https://res.cloudinary.com/dh46cfc1b/image/upload/v1717426057/Solid_khcbhe.png"
-              alt="incorrect close circle"
-              className="icon wrong-icon"
-            />
-          )}
-        </>
-      )}
+      {feedbackIcon}
     </div>
   )
 }

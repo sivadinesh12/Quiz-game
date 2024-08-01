@@ -6,14 +6,14 @@ import './index.css'
 class Login extends Component {
   state = {
     isLoginFailed: false,
-    userInput: '',
+    username: '',
     password: '',
     isPassWordShowing: false,
     errormsg: '',
   }
 
   changeInput = event => {
-    this.setState({userInput: event.target.value})
+    this.setState({username: event.target.value})
   }
 
   changePassword = event => {
@@ -21,7 +21,9 @@ class Login extends Component {
   }
 
   changeCheckbox = () => {
-    this.setState(prevState => ({isPassWordShowing: !prevState.isPassWordShowing}))
+    this.setState(prevState => ({
+      isPassWordShowing: !prevState.isPassWordShowing,
+    }))
   }
 
   onSuccess = jwtToken => {
@@ -36,8 +38,8 @@ class Login extends Component {
 
   loginUser = async event => {
     event.preventDefault()
-    const {userInput, password} = this.state
-    const userDetails = {username: userInput, password: password}
+    const {username, password} = this.state
+    const userDetails = {username, password}
     const url = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
@@ -54,7 +56,7 @@ class Login extends Component {
   }
 
   render() {
-    const {userInput, password, isLoginFailed, errormsg, isPassWordShowing} =
+    const {username, password, isLoginFailed, errormsg, isPassWordShowing} =
       this.state
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
@@ -75,7 +77,7 @@ class Login extends Component {
               </label>
               <input
                 type="input"
-                value={userInput}
+                value={username}
                 id="username"
                 className="input-element"
                 onChange={this.changeInput}

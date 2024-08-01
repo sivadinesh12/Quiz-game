@@ -9,13 +9,38 @@ const DefaultOptionItem = props => {
     selectedOptionId,
     isAnswered,
     optionType,
+    isCorrect,
+    selectedOptionAnswer,
   } = props
-  const {id, text, is_correct} = optionDetails
-  const isCorrect = is_correct
+  const {id, text} = optionDetails
 
   const runCheckOptions = event => {
     if (!isAnswered) {
-      checkOption(optionList, id, optionType)
+      checkOption(optionList, id, optionType, isCorrect)
+    }
+  }
+
+  let feedbackIcon = null
+  if (isAnswered) {
+    if (
+      (selectedOptionId === id && isCorrect === 'true') ||
+      (selectedOptionAnswer === 'false' && isCorrect === 'true')
+    ) {
+      feedbackIcon = (
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/quiz-game-check-circle-img.png"
+          alt="correct checked circle"
+          className="icon correct-icon"
+        />
+      )
+    } else if (selectedOptionId === id && isCorrect === 'false') {
+      feedbackIcon = (
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/quiz-game-close-circle-img.png"
+          alt="incorrect close circle"
+          className="icon wrong-icon"
+        />
+      )
     }
   }
 
@@ -26,24 +51,7 @@ const DefaultOptionItem = props => {
           {text}
         </button>
       </li>
-      {isAnswered && (
-        <>
-          {selectedOptionId === id && isCorrect === 'true' && (
-            <img
-              src="https://res.cloudinary.com/dh46cfc1b/image/upload/v1717426001/check-circle.1_1_lqrzwg.png"
-              alt="correct checked circle"
-              className="icon correct-icon"
-            />
-          )}
-          {selectedOptionId === id && isCorrect === 'false' && (
-            <img
-              src="https://res.cloudinary.com/dh46cfc1b/image/upload/v1717426057/Solid_khcbhe.png"
-              alt="incorrect close circle"
-              className="icon wrong-icon"
-            />
-          )}
-        </>
-      )}
+      {feedbackIcon}
     </div>
   )
 }

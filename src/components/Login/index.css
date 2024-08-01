@@ -1,5 +1,11 @@
 .bg-container {
-  background: linear-gradient(to right, #dbbcc4, #f3dfd8, #d8bfd0, #b7b1d5);
+  background-image: linear-gradient(
+    to right,
+    #dbbcc4,
+    #f3dfd8,
+    #d8bfd0,
+    #b7b1d5
+  );
   height: 100vh;
   padding: 110px;
   overflow: auto;
@@ -13,6 +19,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
 }
 .logo {
   margin: 20px;
@@ -42,12 +49,27 @@
   justify-content: end;
 }
 
-.login-btn{
+.login-btn {
   width: 411px;
   height: 40px;
   border: none;
-  background-color: #0EA5E9;
+  background-color: #0ea5e9;
   border-radius: 10px;
   color: #ffffff;
   font: Intel;
+}
+
+@media screen and (max-width: 480px) {
+  .bg-container {
+    padding: 0px;
+  }
+  .login-form {
+    padding: 20px;
+    margin: 0px;
+    height: 592px;
+    width: 328px;
+  }
+  .input-element {
+    width: 304px;
+  }
 }

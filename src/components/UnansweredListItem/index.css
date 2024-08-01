@@ -52,3 +52,13 @@
   font-size: 24px;
   font-weight: 500;
 }
+.img-item {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.option-img {
+  height: 50px;
+  width: 176px;
+}

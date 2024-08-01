@@ -24,11 +24,11 @@ class QuizGame extends Component {
     lock: false,
     unanswerdQuestionsArray: [],
     selectedOptionId: null,
+    selectedOptionAnswer: null,
   }
 
   componentDidMount() {
     this.getQuizQuestions()
-    this.runTimer()
   }
 
   componentWillUnmount() {
@@ -46,6 +46,7 @@ class QuizGame extends Component {
 
     if (response.ok === true) {
       this.setState({questions: data, api: apiStatus.success})
+      this.runTimer()
     } else {
       console.log(response)
       this.setState({api: apiStatus.failure})
@@ -67,7 +68,19 @@ class QuizGame extends Component {
       }))
     } else {
       clearInterval(this.timerId)
+
       if (!isAnswered) {
+        if (questionIndex >= 10 - 1 && timer === 0) {
+          this.setState(prevState => ({
+            unanswerdQuestions: prevState.unanswerdQuestions + 1,
+            lock: true,
+            unanswerdQuestionsArray: [
+              ...prevState.unanswerdQuestionsArray,
+              currentQuestion,
+            ],
+          }))
+          this.gamereuslts()
+        }
         this.setState(prevState => ({
           unanswerdQuestions: prevState.unanswerdQuestions + 1,
           lock: true,
@@ -91,9 +104,9 @@ class QuizGame extends Component {
     this.runTimer()
   }
 
-  checkOption = (optionList, id, optionsType) => {
+  checkOption = (optionList, id, optionsType, isCorrect) => {
+    console.log(isCorrect)
     clearInterval(this.timerId)
-
     const {lock} = this.state
     if (!lock) {
       const selectedOption = optionList.find(each => each.id === id)
@@ -120,6 +133,7 @@ class QuizGame extends Component {
         isAnswered: true,
         lock: true,
         selectedOptionId: id,
+        selectedOptionAnswer: isCorrect,
       })
     }
   }
@@ -152,8 +166,14 @@ class QuizGame extends Component {
   )
 
   successView = () => {
-    const {questions, questionIndex, timer, isAnswered, selectedOptionId} =
-      this.state
+    const {
+      questions,
+      questionIndex,
+      timer,
+      isAnswered,
+      selectedOptionId,
+      selectedOptionAnswer,
+    } = this.state
     return (
       <div className="questions-card">
         <QuestionItem
@@ -165,31 +185,30 @@ class QuizGame extends Component {
           checkOption={this.checkOption}
           nextQuestion={this.nextQuestion}
           gamereuslts={this.gamereuslts}
+          selectedOptionAnswer={selectedOptionAnswer}
         />
       </div>
     )
   }
 
-  failureView = () => {
-    return (
-      <div className="failure-view">
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-assess-failure-img.png"
-          alt="failure view"
-          className="failure-icon"
-        />
-        <h1 className="error-message">Something went wrong</h1>
-        <p>Our servers are busy please try again</p>
-        <button
-          type="button"
-          onClick={this.getQuizQuestions}
-          className="retry-button"
-        >
-          Retry
-        </button>
-      </div>
-    )
-  }
+  failureView = () => (
+    <div className="failure-view">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/nxt-assess-failure-img.png"
+        alt="failure view"
+        className="failure-icon"
+      />
+      <h1 className="error-message">Something went wrong</h1>
+      <p>Our servers are busy please try again</p>
+      <button
+        type="button"
+        onClick={this.getQuizQuestions}
+        className="retry-button"
+      >
+        Retry
+      </button>
+    </div>
+  )
 
   finalRender = () => {
     const {api} = this.state

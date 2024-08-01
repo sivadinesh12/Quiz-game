@@ -7,7 +7,8 @@ import './index.css'
 
 class QuestionItem extends Component {
   defaultOption = (optionList, optionType) => {
-    const {isAnswered, selectedOptionId, checkOption} = this.props
+    const {isAnswered, selectedOptionId, checkOption, selectedOptionAnswer} =
+      this.props
     return (
       <ul className="defaultlist">
         {optionList.map(each => (
@@ -15,10 +16,12 @@ class QuestionItem extends Component {
             optionDetails={each}
             key={each.id}
             checkOption={checkOption}
+            isCorrect={each.is_correct}
             optionList={optionList}
             isAnswered={isAnswered}
             selectedOptionId={selectedOptionId}
             optionType={optionType}
+            selectedOptionAnswer={selectedOptionAnswer}
           />
         ))}
       </ul>
@@ -26,7 +29,8 @@ class QuestionItem extends Component {
   }
 
   singleSelect = (optionList, optionType) => {
-    const {isAnswered, selectedOptionId} = this.props
+    const {isAnswered, selectedOptionId, checkOption, selectedOptionAnswer} =
+      this.props
     return (
       <ul className="singleOptionList">
         {optionList.map(each => (
@@ -35,9 +39,11 @@ class QuestionItem extends Component {
             key={each.id}
             checkOption={checkOption}
             optionList={optionList}
+            isCorrect={each.is_correct}
             isAnswered={isAnswered}
             selectedOptionId={selectedOptionId}
             optionType={optionType}
+            selectedOptionAnswer={selectedOptionAnswer}
           />
         ))}
       </ul>
@@ -45,7 +51,8 @@ class QuestionItem extends Component {
   }
 
   imageType = (optionList, optionType) => {
-    const {isAnswered, selectedOptionId} = this.props
+    const {isAnswered, selectedOptionId, checkOption, selectedOptionAnswer} =
+      this.props
     return (
       <ul className="img-option-type">
         {optionList.map(each => (
@@ -54,9 +61,12 @@ class QuestionItem extends Component {
             key={each.id}
             checkOption={checkOption}
             optionList={optionList}
+            isCorrect={each.is_correct}
+            imageUrl={each.image_url}
             isAnswered={isAnswered}
             selectedOptionId={selectedOptionId}
             optionType={optionType}
+            selectedOptionAnswer={selectedOptionAnswer}
           />
         ))}
       </ul>
@@ -101,13 +111,12 @@ class QuestionItem extends Component {
           Next Question
         </button>
       )
-    } else {
-      return (
-        <button className="normal-nextbtn" disabled>
-          Next Question
-        </button>
-      )
     }
+    return (
+      <button className="normal-nextbtn" disabled>
+        Next Question
+      </button>
+    )
   }
 
   render() {

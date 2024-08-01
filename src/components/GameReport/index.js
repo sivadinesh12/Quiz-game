@@ -11,7 +11,6 @@ const GameReport = props => {
     correctAnswers,
     wrongAnswers,
   } = location.state
-  console.log(unanswerdQuestionsArray)
   return (
     <div>
       <Header />
@@ -41,7 +40,7 @@ const GameReport = props => {
                   className="icon"
                 />
                 <p className="report-description">
-                  {wrongAnswers} Wrong answers
+                  {wrongAnswers} Incorrect answers
                 </p>
               </div>
               <div className="description-container">
@@ -51,20 +50,25 @@ const GameReport = props => {
                   className="icon"
                 />
                 <p className="report-description">
-                  {unanswerdQuestions} Unattempted
+                  {unanswerdQuestions} Unattempted answers
                 </p>
               </div>
             </div>
           </div>
           <div className="unanswered-container">
             {unanswerdQuestions === 0 ? (
-              <p>Attempted all the questions</p>
+              <h1 className="no-unattempted">Attempted all the questions</h1>
             ) : (
-              <div>
-                <p className="unattempted-heading">Unattempted Questions</p>
+              <div className="unattempted-container">
+                <h1 className="unattempted-heading">Unattempted Questions</h1>
                 <ul className="unanswered-list-container">
                   {unanswerdQuestionsArray.map(each => (
-                    <UnansweredListItem key={each.id} itemDetails={each} />
+                    <UnansweredListItem
+                      key={each.id}
+                      itemDetails={each}
+                      questionText={each.question_text}
+                      optionType={each.options_type}
+                    />
                   ))}
                 </ul>
               </div>

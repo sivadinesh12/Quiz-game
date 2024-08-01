@@ -67,9 +67,16 @@
   height: 100vh;
   align-items: center;
 }
-
+.no-unattempted {
+  color: #0ea5e9;
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 32px;
+}
 .unanswered-list-container {
   list-style-type: none;
+  height: 100vh;
+  overflow: auto;
 }
 
 .unattempted-heading {
@@ -81,4 +88,8 @@
 
 .score-summery {
   margin-bottom: 30px;
+}
+
+.unattempted-container {
+  height: 100vh;
 }

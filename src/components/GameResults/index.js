@@ -1,7 +1,6 @@
+import {useLocation, useHistory} from 'react-router-dom'
 import React from 'react'
 import Header from '../Header'
-import GameReport from '../GameReport'
-import {useLocation, useHistory} from 'react-router-dom'
 import './index.css'
 
 const GameResults = props => {
@@ -27,8 +26,8 @@ const GameResults = props => {
   }
 
   const renderGameResult = () => {
-    const percentage = correctAnswers * 10
-    if (correctAnswers >= 6) {
+    const percentage = (correctAnswers / 10) * 100
+    if (percentage >= 60) {
       return (
         <div className="won-bg">
           <img
@@ -36,7 +35,7 @@ const GameResults = props => {
             alt="won"
             className="trophy-img"
           />
-          <h1>Congrats!</h1>
+          <h1>Congrats</h1>
           <h1>{percentage}% Correctly Answered</h1>
           <p>Quiz completed successfully</p>
           <p>You attempted {correctAnswers} out of 10 questions as correct.</p>
@@ -45,23 +44,23 @@ const GameResults = props => {
           </button>
         </div>
       )
-    } else {
-      return (
-        <div className="fail-bg">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/quiz-game-lose-img.png"
-            alt="lose"
-            className="lose-img"
-          />
-          <p>You lose!</p>
-          <h1>{percentage}% Correctly Answered</h1>
-          <p>You attempted {correctAnswers} out of 10 questions as correct.</p>
-          <button className="report-btn" onClick={gameReport}>
-            Report
-          </button>
-        </div>
-      )
     }
+
+    return (
+      <div className="fail-bg">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/quiz-game-lose-img.png"
+          alt="lose"
+          className="lose-img"
+        />
+        <p>You lose</p>
+        <h1>{percentage}% Correctly Answered</h1>
+        <p>You attempted {correctAnswers} out of 10 questions as correct.</p>
+        <button className="report-btn" onClick={gameReport}>
+          Report
+        </button>
+      </div>
+    )
   }
   return (
     <div>
